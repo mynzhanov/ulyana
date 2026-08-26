@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сто комплиментов Ульяне</title>
+<meta name="description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
+<meta name="theme-color" content="#100d16">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Сто комплиментов Ульяне">
+<meta property="og:description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
+<meta property="og:image" content="https://mynzhanov.github.io/ulyana/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://mynzhanov.github.io/ulyana/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Сто комплиментов Ульяне">
+<meta name="twitter:description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
+<meta name="twitter:image" content="https://mynzhanov.github.io/ulyana/og.png">
+
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 6" shape-rendering="crispEdges"><path fill="%23ff6392" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>'>
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500&family=Pixelify+Sans:wght@400;500&display=swap">
+</head>
+<body>
+<style>
+  :root {
+    --ink:   #100d16;
+    --cream: #f4ece6;
+    --dim:   #7a6d85;
+    --rose:  #ff6392;
+    --font-pixel: "Pixelify Sans", "Courier New", monospace;
+    --font-led:   "Handjet", "Courier New", monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--font-pixel);
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* ---- drifting sprites ---- */
+  .sky {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .spr { display: block; shape-rendering: crispEdges; }
+
+  .float {
+    position: absolute;
+    bottom: -48px;
+    opacity: 0;
+    animation: rise linear forwards;
+    will-change: transform, opacity;
+  }
+  @keyframes rise {
+    0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+    18%  { opacity: 0.85; }
+    80%  { opacity: 0.85; }
+    100% { transform: translate3d(var(--dx), -108vh, 0); opacity: 0; }
+  }
+
+  .burst {
+    position: fixed;
+    z-index: 30;
+    pointer-events: none;
+    animation: pop ease-out forwards;
+  }
+  @keyframes pop {
+    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--bx)), calc(-50% + var(--by))); opacity: 0; }
+  }
+
+  /* ---- shell ---- */
+  .shell {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* ---- the one running line ---- */
+  .ticker {
+    overflow: hidden;
+    padding: 12px 0 11px;
+    border-bottom: 2px solid var(--rose);
+    user-select: none;
+  }
+  .ticker__track {
+    display: flex;
+    width: max-content;
+    animation: marquee linear infinite;
+  }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  .ticker__group { display: flex; flex-shrink: 0; }
+  .ticker__item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-right: 13px;
+    white-space: nowrap;
+    font-family: var(--font-led);
+    font-size: clamp(19px, 5vw, 26px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--rose);
+  }
+
+  /* ---- the compliment ---- */
+  .stage {
+    display: grid;
+    align-content: center;
+    padding: clamp(28px, 9vw, 64px) clamp(22px, 7vw, 56px);
+  }
+
+  .quote-box {
+    display: grid;
+    align-content: center;
+    justify-self: center;
+    width: 100%;
+    max-width: 20em;
+  }
+
+  .quote {
+    margin: 0;
+    font-size: clamp(26px, 7.4vw, 36px);
+    line-height: 1.5;
+    text-wrap: balance;
+    text-align: center;
+    color: var(--cream);
+    transition: opacity 240ms ease;
+  }
+  .quote.is-out { opacity: 0; }
+
+  .caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 0.9em;
+    margin-left: 0.08em;
+    translate: 0 0.08em;
+    background: var(--rose);
+    animation: blink 1.05s steps(1, end) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---- signature ---- */
+  .sign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    padding: 0 20px clamp(20px, 5vh, 34px);
+    margin: 0;
+    font-family: var(--font-led);
+    font-size: clamp(15px, 3.8vw, 18px);
+    letter-spacing: 0.36em;
+    text-indent: 0.36em;
+    text-transform: uppercase;
+    color: var(--dim);
+    user-select: none;
+  }
+
+  @media (max-height: 540px) {
+    .quote { font-size: clamp(20px, 4.6vh, 26px); line-height: 1.4; }
+    .stage { padding: 20px clamp(22px, 7vw, 56px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker__track { animation-play-state: paused; }
+    .ticker { overflow-x: auto; }
+    .caret { animation: none; }
+    .float, .burst { display: none; }
+  }
+</style>
+
+<div class="sky" id="sky"></div>
+
+<div class="shell">
+  <div class="ticker" aria-hidden="true"><div class="ticker__track" id="tick"></div></div>
+
+  <main class="stage">
+    <div class="quote-box" id="quoteBox">
+      <blockquote class="quote" id="quote" aria-live="polite"></blockquote>
+    </div>
+  </main>
+
+  <p class="sign" id="sign">Ульяна</p>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const LINES = `
+Ульяна, ты как солнце — только не слепишь, а согреваешь
+У тебя смех, от которого день сам собой выпрямляется
+Ты умеешь молчать так, что рядом становится спокойно
+С тобой даже очередь в магазине — маленькое приключение
+Твои глаза — это два аргумента против плохого настроения
+Имя Ульяна звучит как первые ноты хорошей песни
+Ты добрая не потому, что надо, а потому что иначе не умеешь
+Рядом с тобой хочется быть лучше, чем ты есть
+У тебя талант превращать обычный вечер в лучший
+Ты красивая даже в семь утра с непричёсанными мыслями
+С тобой можно молчать полчаса и не заскучать
+Ты умнее, чем позволяешь себе казаться
+У тебя руки, за которые хочется держаться
+Ты слушаешь так, будто важнее меня в мире нет
+Ульяна, твоя улыбка портит статистику плохих дней
+Ты пахнешь домом, в который хочется возвращаться
+У тебя походка человека, который знает, куда идёт
+Ты умеешь радоваться мелочам — это редкий дар
+С тобой не страшно быть настоящим
+Ты смеёшься над моими шутками — уже за это спасибо
+Ты красивая тихой красотой, которая не кричит
+Твой голос — лучший будильник и лучшая колыбельная
+Ульяна, ты умеешь превращать «надо» в «хочу»
+Ты как хорошая книга: каждый раз находишь новое
+У тебя честные глаза, и это самое красивое в тебе
+Ты не боишься быть смешной — а это смелость
+С тобой чай вкуснее, а дождь уютнее
+Ты помнишь мелочи, которые никто не помнит
+Твоя забота не громкая, но её очень видно
+Ульяна, ты обнимаешь так, что всё встаёт на место
+Ты искренняя, а это редкий дефицит
+У тебя вкус, который нельзя купить
+Ты справляешься с тем, о чём другие только жалуются
+Твои волосы стоит трогать чаще, чем разрешено
+Ты умеешь спорить и при этом не обижать
+С тобой любая дорога кажется короче
+Ты красивая, когда сосредоточена — особенно тогда
+Ульяна, ты человек, которому хочется писать первым
+Ты умеешь прощать без напоминаний
+Твоё «доброе утро» работает лучше кофе
+Ты не пытаешься нравиться — и поэтому нравишься
+У тебя сильный характер в очень мягкой обёртке
+Ты замечаешь, что мне плохо, раньше меня самого
+С тобой не скучно даже в полной тишине
+Ты умеешь мечтать вслух — не бросай, пожалуйста
+Ульяна, у тебя почерк такой же красивый, как ты
+Ты честная даже когда это неудобно
+У тебя редкая способность делать людям легче
+Ты выглядишь так, что хочется взять за руку при всех
+Ты умеешь смеяться до слёз — и это лечит
+С тобой хочется строить планы дальше выходных
+Ты бываешь упрямой, и мне это нравится
+Ульяна, ты слушаешь музыку так, будто её видишь
+Ты никогда не бываешь лишней
+У тебя тёплые ладони и такое же сердце
+Ты держишь слово — это дороже любых комплиментов
+Твоя усталость тебе, между прочим, тоже идёт
+Ты умеешь начинать заново — это настоящая сила
+С тобой можно быть глупым и не стыдиться
+Ульяна, ты делаешь комнату светлее, просто войдя
+Ты задаёшь вопросы, после которых думаешь днями
+У тебя красивая спина, когда уходишь, и лучше — когда возвращаешься
+Ты не завидуешь, и это очень взрослое качество
+Твоя доброта — не наивность, а осознанный выбор
+Ты пишешь смешно, даже когда совсем не стараешься
+С тобой не нужно притворяться сильным
+Ульяна, ты умеешь быть рядом молча и вовремя
+Ты красивая без фильтров — многократно проверено
+У тебя привычка гладить всех котов, и она говорит о тебе всё
+Ты умеешь ждать и не пилить за это
+Твои идеи смелее, чем ты сама о себе думаешь
+Ты извиняешься первой, даже когда права
+С тобой еда вкуснее, а планы реальнее
+Ульяна, у тебя смех, который слышно через две комнаты
+Ты удивляешь, совсем не пытаясь удивить
+Ты помнишь все дни рождения — почти суперсила
+Твоя внимательность к деталям пугает и восхищает
+Ты одинаково хороша в платье и в моей футболке
+Ты умеешь быть слабой и не переставать быть сильной
+С тобой утро перестало быть врагом
+Ульяна, тебе очень идёт быть счастливой
+Ты хвалишь так, что сразу хочется работать
+У тебя выдающийся талант к неловким танцам на кухне
+Ты не обесцениваешь — ни себя, ни других
+Твои сообщения я перечитываю по два раза
+Ты умеешь превращать плохие новости в план действий
+С тобой тишина никогда не бывает пустой
+Ульяна, у тебя очень красивые локти — да, и они тоже
+Ты доводишь начатое, даже когда никто не смотрит
+Твоё мнение важно мне больше, чем ты думаешь
+Ты умеешь смотреть так, что всё понятно без слов
+Ты не боишься спрашивать — поэтому знаешь больше всех
+С тобой хочется быть честным даже в мелочах
+Ульяна, ты пахнешь как хорошее воскресенье
+Ты умеешь дружить, а это отдельный талант
+Твоя смелость тише моей, но заметно крепче
+Ты красивая, когда злишься, но лучше не проверять
+Ты делаешь мир вокруг себя чуть аккуратнее
+Ульяна, с тобой всё как-то само получается
+У тебя глаза человека, который умеет верить
+Ты — лучшее, что случилось со мной случайно
+`.trim().split("\n").map(s => s.trim()).filter(Boolean);
+
+  /* ---------- pixel sprites ---------- */
+  const SPRITES = {
+    heart: {
+      p: [".XX.HH.", "XXXHHHH", "XXXHHHH", ".XXHHH.", "..XHH..", "...X..."],
+      c: { X: "#ff6392", H: "#ffa8c2" }
+    },
+    sparkle: {
+      p: ["...C...", "...C...", "..CCC..", "CCCWCCC", "..CCC..", "...C...", "...C..."],
+      c: { C: "#ff6392", W: "#f4ece6" }
+    },
+    smiley: {
+      p: ["..RRRR..", ".RRRRRR.", "RRIRRIRR", "RRRRRRRR", "RRRRRRRR", "RRIIIIRR", ".RRRRRR.", "..RRRR.."],
+      c: { R: "#ff6392", I: "#100d16" }
+    }
+  };
+  const NAMES = Object.keys(SPRITES);
+
+  function sprite(name, w) {
+    const s = SPRITES[name];
+    const cols = s.p[0].length, rows = s.p.length;
+    let r = "";
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const ch = s.p[y][x];
+        if (ch === ".") continue;
+        r += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + s.c[ch] + '"/>';
+      }
+    }
+    return '<svg class="spr" viewBox="0 0 ' + cols + ' ' + rows + '" width="' + w +
+           '" height="' + Math.round(w * rows / cols) + '" aria-hidden="true">' + r + "</svg>";
+  }
+
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const small = () => innerWidth < 620;
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  document.getElementById("sign").insertAdjacentHTML("afterbegin", sprite("heart", 15));
+
+  /* ---------- running line ---------- */
+  const tick = document.getElementById("tick");
+
+  function buildTicker() {
+    const items = shuffle(LINES).slice(0, 22)
+      .map(t => '<span class="ticker__item">' + sprite("heart", 17) + "<span>" + t + "</span></span>")
+      .join("");
+    tick.innerHTML = '<div class="ticker__group">' + items + '</div><div class="ticker__group">' + items + "</div>";
+    tick.style.animationDuration = (tick.scrollWidth / 2 / (small() ? 62 : 88)).toFixed(1) + "s";
+  }
+  buildTicker();
+  tick.addEventListener("animationiteration", buildTicker);
+
+  /* ---------- the compliment ---------- */
+  const quote = document.getElementById("quote");
+  const box = document.getElementById("quoteBox");
+
+  /* reserve the height of the longest line, so the page never jumps */
+  function fitQuote() {
+    const probe = document.createElement("blockquote");
+    probe.className = "quote";
+    probe.style.cssText = "position:absolute;visibility:hidden;width:" + quote.offsetWidth + "px;";
+    box.appendChild(probe);
+    let max = 0;
+    for (const t of LINES) {
+      probe.textContent = t;
+      if (probe.offsetHeight > max) max = probe.offsetHeight;
+    }
+    probe.remove();
+    box.style.minHeight = max + "px";
+  }
+
+  let order = shuffle(LINES.map((_, i) => i));
+  let cursor = 0;
+  let typer = null, holder = null;
+
+  function show(text) {
+    quote.classList.remove("is-out");
+    if (reduced) { quote.textContent = text; return; }
+    let n = 0;
+    typer = setInterval(() => {
+      n++;
+      quote.innerHTML = text.slice(0, n).replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+                        '<span class="caret"></span>';
+      if (n >= text.length) { clearInterval(typer); typer = null; }
+    }, 27);
+  }
+
+  function next() {
+    clearInterval(typer);
+    clearTimeout(holder);
+    if (cursor >= order.length) { order = shuffle(LINES.map((_, i) => i)); cursor = 0; }
+    const text = LINES[order[cursor++]];
+    quote.classList.add("is-out");
+    setTimeout(() => show(text), reduced ? 0 : 230);
+    holder = setTimeout(next, reduced ? 7000 : 4600 + text.length * 27);
+  }
+
+  /* ---------- floating sprites ---------- */
+  const sky = document.getElementById("sky");
+  const CAP = () => (small() ? 12 : 18);
+
+  function drift(seed) {
+    if (!seed && (document.hidden || sky.childElementCount >= CAP())) return;
+    const el = document.createElement("div");
+    el.className = "float";
+    el.style.left = rnd(3, 90).toFixed(1) + "vw";
+    el.style.setProperty("--dx", rnd(-45, 45).toFixed(0) + "px");
+    const dur = rnd(11, 19);
+    el.style.animationDuration = dur.toFixed(1) + "s";
+    if (seed) el.style.animationDelay = "-" + rnd(0, dur * 0.8).toFixed(1) + "s";
+    el.innerHTML = sprite(pick(NAMES), Math.round(rnd(18, small() ? 30 : 38)));
+    el.addEventListener("animationend", () => el.remove());
+    sky.appendChild(el);
+  }
+
+  /* ---------- tap: hearts + next ---------- */
+  function boom(x, y) {
+    if (reduced) return;
+    const n = small() ? 5 : 7;
+    for (let k = 0; k < n; k++) {
+      const el = document.createElement("div");
+      el.className = "burst";
+      el.style.left = x + "px";
+      el.style.top = y + "px";
+      const a = (k / n) * Math.PI * 2 + rnd(-0.3, 0.3);
+      const d = rnd(52, 118);
+      el.style.setProperty("--bx", (Math.cos(a) * d).toFixed(0) + "px");
+      el.style.setProperty("--by", (Math.sin(a) * d - 26).toFixed(0) + "px");
+      el.style.animationDuration = rnd(680, 980).toFixed(0) + "ms";
+      el.innerHTML = sprite(k % 3 === 0 ? "sparkle" : "heart", Math.round(rnd(14, 24)));
+      el.addEventListener("animationend", () => el.remove());
+      document.body.appendChild(el);
+    }
+  }
+
+  addEventListener("pointerdown", e => { boom(e.clientX, e.clientY); next(); });
+
+  addEventListener("keydown", e => {
+    if (e.key === " " || e.key === "Enter") { e.preventDefault(); next(); }
+  });
+
+  /* ---------- boot ---------- */
+  fitQuote();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fitQuote(); buildTicker(); });
+  next();
+
+  let t;
+  addEventListener("resize", () => {
+    clearTimeout(t);
+    t = setTimeout(() => { fitQuote(); buildTicker(); }, 220);
+  });
+
+  if (!reduced) {
+    for (let k = 0; k < CAP() - 2; k++) drift(true);
+    setInterval(drift, 1150);
+    addEventListener("visibilitychange", () => {
+      if (document.hidden) return;
+      for (let k = sky.childElementCount; k < CAP() - 2; k++) drift(true);
+    });
+  }
+})();
+</script>
+</body>
+</html>
