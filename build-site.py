@@ -11,8 +11,10 @@ import io, re, sys
 BASE = sys.argv[1].rstrip("/") if len(sys.argv) > 1 else ""
 TITLE = "Сто комплиментов Ульяне"
 DESC  = "101 комплимент Ульяне — бегущей строкой, пиксельными буквами."
-HEART = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 6" shape-rendering="crispEdges">'
-         '<path fill="%23ee7499" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>')
+ICON  = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'
+         '<rect width="32" height="32" rx="7" fill="%23050505"/>'
+         '<circle cx="16" cy="16" r="9" fill="%23ff7a9c" opacity="0.28"/>'
+         '<circle cx="16" cy="16" r="5" fill="%23ff7a9c"/></svg>')
 
 src = io.open("ulyana.html", encoding="utf-8").read()
 m = re.match(r'\s*<title>.*?</title>\s*\n\s*(<link[^>]*fonts\.googleapis[^>]*>)\s*\n',
@@ -47,7 +49,7 @@ head = f'''<!doctype html>
 <meta name="twitter:description" content="{DESC}">
 <meta name="twitter:image" content="{img}">
 
-<link rel="icon" href='data:image/svg+xml,{HEART}'>
+<link rel="icon" href='data:image/svg+xml,{ICON}'>
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 {FONTS}

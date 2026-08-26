@@ -20,74 +20,97 @@
 <meta name="twitter:description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
 <meta name="twitter:image" content="https://mynzhanov.github.io/Ulyana/og.png">
 
-<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 6" shape-rendering="crispEdges"><path fill="%23ee7499" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>'>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="%23050505"/><circle cx="16" cy="16" r="9" fill="%23ff7a9c" opacity="0.28"/><circle cx="16" cy="16" r="5" fill="%23ff7a9c"/></svg>'>
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500&family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500&family=Manrope:wght@500;600&display=swap">
 </head>
 <body>
 <style>
   :root {
-    --ink:   #100d16;
-    --cream: #f4ece6;
-    --dim:   #8f767c;
-    --rose:  #ee7499;
-    --font-pixel: "Press Start 2P", "Courier New", monospace;
-    --font-led:   "Handjet", "Courier New", monospace;
+    /* Ethereal Glass: глубокий OLED-фон, одно тёплое свечение, один акцент */
+    --ground:  #050505;
+    --text:    #f4eff1;
+    --accent-rgb: 255 122 156;      /* один источник истины для акцента */
+    --warm-rgb:   255 179 122;
+    --accent:  rgb(var(--accent-rgb));
+
+    --shell:   rgba(255, 255, 255, 0.07);
+    --hair:    rgba(255, 255, 255, 0.15);
+    --core:    rgba(9, 8, 10, 0.78);
+
+    --font-display: "Unbounded", "Helvetica Neue", sans-serif;
+    --font-meta:    "Manrope", "Helvetica Neue", sans-serif;
+
+    /* физика: одна кривая на все переходы, никаких linear и ease-in-out */
+    --ease: cubic-bezier(0.32, 0.72, 0, 1);
+
+    --r-shell: 32px;
+    --r-core:  24px;   /* concentric: r-shell минус padding оправы */
   }
 
   * { box-sizing: border-box; }
-
   html { -webkit-text-size-adjust: 100%; }
 
   body {
     margin: 0;
     min-height: 100vh;
     min-height: 100dvh;
-    background: var(--ink);
-    color: var(--cream);
-    font-family: var(--font-pixel);
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--font-meta);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
   }
 
-  /* ---- drifting sprites ---- */
-  .sky {
+  /* ---------- свечение ---------- */
+  .glow {
+    position: fixed;
+    inset: -30%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .glow i {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    will-change: transform;
+  }
+  .glow i:nth-child(1) {
+    width: 62vmax; height: 62vmax;
+    top: 4%; left: -8%;
+    background: radial-gradient(circle at 50% 50%,
+                rgb(var(--accent-rgb) / 0.17), rgb(var(--accent-rgb) / 0.04) 40%, transparent 66%);
+    animation: drift-a 34s var(--ease) infinite alternate;
+  }
+  .glow i:nth-child(2) {
+    width: 52vmax; height: 52vmax;
+    bottom: 2%; right: -12%;
+    background: radial-gradient(circle at 50% 50%,
+                rgb(var(--warm-rgb) / 0.12), rgb(var(--warm-rgb) / 0.03) 40%, transparent 66%);
+    animation: drift-b 42s var(--ease) infinite alternate;
+  }
+  @keyframes drift-a {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to   { transform: translate3d(9vw, 7vh, 0) scale(1.14); }
+  }
+  @keyframes drift-b {
+    from { transform: translate3d(0, 0, 0) scale(1.08); }
+    to   { transform: translate3d(-8vw, -6vh, 0) scale(1); }
+  }
+
+  /* ---------- зерно ---------- */
+  .grain {
     position: fixed;
     inset: 0;
-    z-index: 1;
-    overflow: hidden;
+    z-index: 40;
     pointer-events: none;
-  }
-  .spr { display: block; shape-rendering: crispEdges; }
-
-  .float {
-    position: absolute;
-    bottom: -48px;
-    opacity: 0;
-    animation: rise linear forwards;
-    will-change: transform, opacity;
-  }
-  @keyframes rise {
-    0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-    18%  { opacity: 0.5; }
-    80%  { opacity: 0.5; }
-    100% { transform: translate3d(var(--dx), -108vh, 0); opacity: 0; }
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .burst {
-    position: fixed;
-    z-index: 30;
-    pointer-events: none;
-    animation: pop ease-out forwards;
-  }
-  @keyframes pop {
-    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
-    100% { transform: translate(calc(-50% + var(--bx)), calc(-50% + var(--by))); opacity: 0; }
-  }
-
-  /* ---- shell ---- */
+  /* ---------- каркас ---------- */
   .shell {
     position: relative;
     z-index: 10;
@@ -95,124 +118,219 @@
     min-height: 100dvh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    align-items: center;
+    padding: clamp(18px, 4vh, 30px) 0 0;
   }
 
-  /* ---- the one running line ---- */
-  .ticker {
-    overflow: hidden;
-    padding: 12px 0 11px;
-    border-bottom: 2px solid var(--rose);
-    user-select: none;
-  }
-  .ticker__track {
-    display: flex;
-    width: max-content;
-    animation: marquee linear infinite;
-  }
-  @keyframes marquee { to { transform: translateX(-50%); } }
-
-  .ticker__group { display: flex; flex-shrink: 0; }
-  .ticker__item {
+  /* ---------- плавающий остров ---------- */
+  .island {
+    justify-self: center;
     display: flex;
     align-items: center;
-    gap: 13px;
-    padding-right: 13px;
-    white-space: nowrap;
-    font-family: var(--font-led);
-    font-size: clamp(14px, 3.4vw, 18px);
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: 0.09em;
+    gap: 10px;
+    padding: 9px 18px;
+    border: 1px solid var(--hair);
+    border-radius: 999px;
+    background: var(--shell);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .island span {
+    font-family: var(--font-meta);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--rose);
+    color: rgba(244, 239, 241, 0.72);
+  }
+  .island b {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
   }
 
-  /* ---- the compliment ---- */
+  /* ---------- сцена и стопка ---------- */
   .stage {
     display: grid;
-    align-content: center;
-    padding: clamp(28px, 9vw, 64px) clamp(22px, 7vw, 56px);
+    place-items: center;
+    padding: clamp(20px, 5vh, 44px) clamp(16px, 5vw, 40px);
   }
 
-  .quote-box {
-    display: grid;
-    align-content: center;
-    justify-self: center;
+  .deck {
+    position: relative;
     width: 100%;
-    max-width: 22ch;
+    max-width: 520px;
   }
+
+  /* Z-Axis Cascade: две карточки позади намекают на колоду из 101 фразы */
+  .deck::before,
+  .deck::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--hair);
+    border-radius: var(--r-shell);
+    background: rgba(255, 255, 255, 0.028);
+    pointer-events: none;
+  }
+  .deck::before {
+    transform: translateY(-10px) scale(0.955) rotate(1.6deg);
+    opacity: 0.5;
+  }
+  .deck::after {
+    transform: translateY(-19px) scale(0.912) rotate(-2.2deg);
+    opacity: 0.28;
+  }
+
+  /* Double-Bezel: оправа и ядро с концентричными радиусами */
+  .card {
+    position: relative;
+    padding: 7px;                       /* толщина оправы */
+    border: 1px solid var(--hair);
+    border-radius: var(--r-shell);
+    background: var(--shell);
+    box-shadow: 0 44px 120px -44px rgb(var(--accent-rgb) / 0.30);
+  }
+  .card__core {
+    border-radius: var(--r-core);
+    background: var(--core);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    padding: clamp(26px, 6vw, 44px) clamp(20px, 5vw, 38px);
+  }
+
+  .quote-box { display: grid; align-content: center; }
 
   .quote {
     margin: 0;
-    font-size: clamp(16px, 4.8vw, 26px);
-    line-height: 1.75;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(19px, 5.2vw, 30px);
+    line-height: 1.42;
+    letter-spacing: -0.012em;
     text-wrap: balance;
-    text-align: center;
-    color: var(--cream);
-    /* пиксель-артная обводка: отделяет буквы от спрайтов, летящих позади */
-    text-shadow:
-       2px 0 0 var(--ink), -2px 0 0 var(--ink),
-       0 2px 0 var(--ink),  0 -2px 0 var(--ink),
-       2px 2px 0 var(--ink), -2px 2px 0 var(--ink),
-       2px -2px 0 var(--ink), -2px -2px 0 var(--ink);
-    transition: opacity 240ms ease;
+    color: var(--text);
   }
-  .quote.is-out { opacity: 0; }
-
-  .caret {
-    display: inline-block;
-    width: 0.55em;
-    height: 0.9em;
-    margin-left: 0.08em;
-    translate: 0 0.08em;
-    background: var(--rose);
-    animation: blink 1.05s steps(1, end) infinite;
+  .quote.is-out {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
   }
-  @keyframes blink { 50% { opacity: 0; } }
+  .quote.is-in {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    transition: opacity 760ms var(--ease), transform 760ms var(--ease), filter 760ms var(--ease);
+  }
 
-  /* ---- signature ---- */
-  .sign {
+  /* ---------- кнопка: пилюля с вложенной иконкой ---------- */
+  .next {
+    justify-self: center;
+    margin-top: clamp(20px, 4vh, 30px);
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 7px 7px 7px 22px;
+    border: 1px solid var(--hair);
+    border-radius: 999px;
+    background: var(--shell);
+    color: var(--text);
+    font-family: var(--font-meta);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 420ms var(--ease), background 420ms var(--ease), border-color 420ms var(--ease);
+  }
+  .next__icon {
+    display: grid;
+    place-items: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.10);
+    transition: transform 420ms var(--ease), background 420ms var(--ease);
+  }
+  .next__icon svg { display: block; }
+  .next:hover { background: rgba(255, 255, 255, 0.085); border-color: rgba(255, 255, 255, 0.18); }
+  .next:hover .next__icon { transform: translate(3px, -2px) scale(1.06); background: rgb(var(--accent-rgb) / 0.22); }
+  .next:active { transform: scale(0.98); }
+  .next:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+
+  /* ---------- нижняя лента ---------- */
+  .ribbon {
+    overflow: hidden;
+    padding: 0 0 clamp(16px, 3.4vh, 26px);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+  .ribbon__track {
+    display: flex;
+    width: max-content;
+    animation: slide 150s linear infinite;   /* лента требует постоянной скорости */
+  }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  .ribbon__group { display: flex; flex-shrink: 0; }
+  .ribbon__item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 11px;
-    padding: 0 20px clamp(20px, 5vh, 34px);
-    margin: 0;
-    font-family: var(--font-led);
-    font-size: clamp(12px, 3.2vw, 15px);
-    letter-spacing: 0.42em;
-    text-indent: 0.42em;
+    gap: 26px;
+    padding-right: 26px;
+    white-space: nowrap;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.17em;
     text-transform: uppercase;
-    color: var(--dim);
-    user-select: none;
+    color: rgba(244, 239, 241, 0.5);
+  }
+  .ribbon__item::after {                      /* волосяная линия вместо точки-разделителя */
+    content: "";
+    width: 1px; height: 11px;
+    background: rgba(255, 255, 255, 0.17);
   }
 
-  @media (max-height: 540px) {
-    .quote { font-size: clamp(13px, 3.2vh, 18px); line-height: 1.6; }
-    .stage { padding: 20px clamp(22px, 7vw, 56px); }
+  /* появление при загрузке, каскадом */
+  .rise { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+  .rise.on {
+    opacity: 1; transform: none; filter: blur(0);
+    transition: opacity 900ms var(--ease), transform 900ms var(--ease), filter 900ms var(--ease);
+  }
+
+  @media (max-height: 620px) {
+    .quote { font-size: clamp(16px, 3.6vh, 22px); line-height: 1.35; }
+    .card__core { padding: 20px 18px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ticker__track { animation-play-state: paused; }
-    .ticker { overflow-x: auto; }
-    .caret { animation: none; }
-    .float, .burst { display: none; }
+    .glow i { animation: none; }
+    .ribbon__track { animation: none; }
+    .ribbon { overflow-x: auto; }
+    .rise, .quote { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
   }
 </style>
 
-<div class="sky" id="sky"></div>
+<div class="glow" aria-hidden="true"><i></i><i></i></div>
 
 <div class="shell">
-  <div class="ticker" aria-hidden="true"><div class="ticker__track" id="tick"></div></div>
+  <div class="island rise" id="island"><b></b><span>Ульяне</span></div>
 
   <main class="stage">
-    <div class="quote-box" id="quoteBox">
-      <blockquote class="quote" id="quote" aria-live="polite"></blockquote>
+    <div class="deck rise" id="deck">
+      <div class="card">
+        <div class="card__core">
+          <div class="quote-box" id="quoteBox">
+            <blockquote class="quote" id="quote" aria-live="polite"></blockquote>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
-  <p class="sign" id="sign">Ульяна</p>
+  <div class="ribbon rise" id="ribbon" aria-hidden="true"><div class="ribbon__track" id="track"></div></div>
 </div>
+
+<div class="grain" aria-hidden="true"></div>
 
 <script>
 (() => {
@@ -322,72 +440,35 @@
 Ты — лучшее, что случилось со мной случайно
 `.trim().split("\n").map(s => s.trim()).filter(Boolean);
 
-  /* ---------- pixel sprites ---------- */
-  const SPRITES = {
-    heart: {
-      p: [".XX.HH.", "XXXHHHH", "XXXHHHH", ".XXHHH.", "..XHH..", "...X..."],
-      c: { X: "#ee7499", H: "#f3b4c7" }
-    },
-    sparkle: {
-      p: ["...C...", "...C...", "..CCC..", "CCCWCCC", "..CCC..", "...C...", "...C..."],
-      c: { C: "#ee7499", W: "#f4ece6" }
-    },
-    smiley: {
-      p: ["..RRRR..", ".RRRRRR.", "RRIRRIRR", "RRRRRRRR", "RRRRRRRR", "RRIIIIRR", ".RRRRRR.", "..RRRR.."],
-      c: { R: "#ee7499", I: "#100d16" }
-    }
-  };
-  const NAMES = Object.keys(SPRITES);
-
-  function sprite(name, w) {
-    const s = SPRITES[name];
-    const cols = s.p[0].length, rows = s.p.length;
-    let r = "";
-    for (let y = 0; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        const ch = s.p[y][x];
-        if (ch === ".") continue;
-        r += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + s.c[ch] + '"/>';
-      }
-    }
-    return '<svg class="spr" viewBox="0 0 ' + cols + ' ' + rows + '" width="' + w +
-           '" height="' + Math.round(w * rows / cols) + '" aria-hidden="true">' + r + "</svg>";
-  }
-
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  const pick = a => a[Math.floor(Math.random() * a.length)];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const small = () => innerWidth < 620;
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
-  function shuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
+  /* ---------- кнопка ---------- */
+  const btn = document.createElement("button");
+  btn.className = "next";
+  btn.type = "button";
+  btn.innerHTML = 'Дальше<span class="next__icon">' +
+    '<svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">' +
+    '<path d="M4 11L11 4M11 4H5.6M11 4v5.4" stroke="currentColor" stroke-width="1.1" ' +
+    'stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+  document.querySelector(".stage").appendChild(btn);
+
+  /* ---------- лента ---------- */
+  const track = document.getElementById("track");
+  function buildRibbon() {
+    const items = shuffle(LINES).slice(0, 20)
+      .map(t => '<span class="ribbon__item">' + t + "</span>").join("");
+    track.innerHTML = '<div class="ribbon__group">' + items + '</div><div class="ribbon__group">' + items + "</div>";
+    track.style.animationDuration = (track.scrollWidth / 2 / 26).toFixed(0) + "s";
   }
+  buildRibbon();
+  track.addEventListener("animationiteration", buildRibbon);
 
-  document.getElementById("sign").insertAdjacentHTML("afterbegin", sprite("heart", 15));
-
-  /* ---------- running line ---------- */
-  const tick = document.getElementById("tick");
-
-  function buildTicker() {
-    const items = shuffle(LINES).slice(0, 22)
-      .map(t => '<span class="ticker__item">' + sprite("heart", 17) + "<span>" + t + "</span></span>")
-      .join("");
-    tick.innerHTML = '<div class="ticker__group">' + items + '</div><div class="ticker__group">' + items + "</div>";
-    tick.style.animationDuration = (tick.scrollWidth / 2 / (small() ? 62 : 88)).toFixed(1) + "s";
-  }
-  buildTicker();
-  tick.addEventListener("animationiteration", buildTicker);
-
-  /* ---------- the compliment ---------- */
+  /* ---------- комплименты ---------- */
   const quote = document.getElementById("quote");
   const box = document.getElementById("quoteBox");
 
-  /* reserve the height of the longest line, so the page never jumps */
+  /* высота под самую длинную фразу, чтобы карточка не дёргалась */
   function fitQuote() {
     const probe = document.createElement("blockquote");
     probe.className = "quote";
@@ -402,96 +483,47 @@
     box.style.minHeight = max + "px";
   }
 
-  let order = shuffle(LINES.map((_, i) => i));
-  let cursor = 0;
-  let typer = null, holder = null;
+  let order = shuffle(LINES.map((_, i) => i)), cursor = 0, hold = null, swap = null;
 
-  function show(text) {
-    quote.classList.remove("is-out");
-    if (reduced) { quote.textContent = text; return; }
-    let n = 0;
-    typer = setInterval(() => {
-      n++;
-      quote.innerHTML = text.slice(0, n).replace(/&/g, "&amp;").replace(/</g, "&lt;") +
-                        '<span class="caret"></span>';
-      if (n >= text.length) { clearInterval(typer); typer = null; }
-    }, 27);
-  }
-
-  function next() {
-    clearInterval(typer);
-    clearTimeout(holder);
+  function show() {
     if (cursor >= order.length) { order = shuffle(LINES.map((_, i) => i)); cursor = 0; }
     const text = LINES[order[cursor++]];
+    quote.classList.remove("is-in");
     quote.classList.add("is-out");
-    setTimeout(() => show(text), reduced ? 0 : 230);
-    holder = setTimeout(next, reduced ? 7000 : 4600 + text.length * 27);
+    /* без rAF: в скрытой вкладке он не вызывается и текст не появился бы вовсе */
+    clearTimeout(swap);
+    swap = setTimeout(() => {
+      quote.textContent = text;
+      void quote.offsetWidth;          /* форсируем пересчёт, иначе переход не стартует */
+      quote.classList.remove("is-out");
+      quote.classList.add("is-in");
+    }, reduced ? 0 : 260);
+    clearTimeout(hold);
+    hold = setTimeout(show, reduced ? 8000 : 6400);
   }
 
-  /* ---------- floating sprites ---------- */
-  const sky = document.getElementById("sky");
-  const CAP = () => (small() ? 12 : 18);
-
-  function drift(seed) {
-    if (!seed && (document.hidden || sky.childElementCount >= CAP())) return;
-    const el = document.createElement("div");
-    el.className = "float";
-    /* держим центральную колонку свободной: там читается комплимент */
-    el.style.left = (Math.random() < 0.5 ? rnd(2, 25) : rnd(74, 95)).toFixed(1) + "vw";
-    el.style.setProperty("--dx", rnd(-26, 26).toFixed(0) + "px");
-    const dur = rnd(11, 19);
-    el.style.animationDuration = dur.toFixed(1) + "s";
-    if (seed) el.style.animationDelay = "-" + rnd(0, dur * 0.8).toFixed(1) + "s";
-    el.innerHTML = sprite(pick(NAMES), Math.round(rnd(18, small() ? 30 : 38)));
-    el.addEventListener("animationend", () => el.remove());
-    sky.appendChild(el);
-  }
-
-  /* ---------- tap: hearts + next ---------- */
-  function boom(x, y) {
-    if (reduced) return;
-    const n = small() ? 5 : 7;
-    for (let k = 0; k < n; k++) {
-      const el = document.createElement("div");
-      el.className = "burst";
-      el.style.left = x + "px";
-      el.style.top = y + "px";
-      const a = (k / n) * Math.PI * 2 + rnd(-0.3, 0.3);
-      const d = rnd(52, 118);
-      el.style.setProperty("--bx", (Math.cos(a) * d).toFixed(0) + "px");
-      el.style.setProperty("--by", (Math.sin(a) * d - 26).toFixed(0) + "px");
-      el.style.animationDuration = rnd(680, 980).toFixed(0) + "ms";
-      el.innerHTML = sprite(k % 3 === 0 ? "sparkle" : "heart", Math.round(rnd(14, 24)));
-      el.addEventListener("animationend", () => el.remove());
-      document.body.appendChild(el);
-    }
-  }
-
-  addEventListener("pointerdown", e => { boom(e.clientX, e.clientY); next(); });
-
+  btn.addEventListener("click", e => { e.stopPropagation(); show(); });
+  addEventListener("pointerdown", e => { if (!e.target.closest(".next")) show(); });
   addEventListener("keydown", e => {
-    if (e.key === " " || e.key === "Enter") { e.preventDefault(); next(); }
+    if (e.key === " " || e.key === "Enter") {
+      if (document.activeElement === btn) return;
+      e.preventDefault(); show();
+    }
   });
 
-  /* ---------- boot ---------- */
+  /* ---------- запуск ---------- */
   fitQuote();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fitQuote(); buildTicker(); });
-  next();
-
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fitQuote(); buildRibbon(); });
   let t;
-  addEventListener("resize", () => {
-    clearTimeout(t);
-    t = setTimeout(() => { fitQuote(); buildTicker(); }, 220);
-  });
+  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { fitQuote(); buildRibbon(); }, 220); });
 
-  if (!reduced) {
-    for (let k = 0; k < CAP() - 2; k++) drift(true);
-    setInterval(drift, 1150);
-    addEventListener("visibilitychange", () => {
-      if (document.hidden) return;
-      for (let k = sky.childElementCount; k < CAP() - 2; k++) drift(true);
-    });
-  }
+  show();
+
+  /* каскадное появление */
+  const seq = [document.getElementById("island"), document.getElementById("deck"),
+               btn, document.getElementById("ribbon")];
+  btn.classList.add("rise");
+  seq.forEach((el, i) => setTimeout(() => el.classList.add("on"), reduced ? 0 : 90 + i * 130));
 })();
 </script>
 </body>
