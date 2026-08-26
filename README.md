@@ -4,7 +4,7 @@
 поверх тёмного фона с медленно дышащим тёплым свечением. Тап в любом месте
 или кнопка «Дальше» — следующая фраза. Внизу тихо идёт лента из тех же фраз.
 
-**Открыть:** https://mynzhanov.github.io/Ulyana/
+**Открыть:** https://mynzhanov.github.io/ulyana/
 
 ## Дизайн
 
@@ -43,7 +43,7 @@
 на строку. После правки:
 
 ```
-python3 build-site.py https://mynzhanov.github.io/Ulyana
+python3 build-site.py https://mynzhanov.github.io/ulyana
 git commit -am "новые комплименты" && git push
 ```
 
