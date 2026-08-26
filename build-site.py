@@ -15,10 +15,12 @@ HEART = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 6" shape-render
          '<path fill="%23ee7499" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>')
 
 src = io.open("ulyana.html", encoding="utf-8").read()
-body = re.sub(r'^\s*<title>.*?</title>\s*\n\s*<link[^>]*fonts\.googleapis[^>]*>\s*\n',
-              "", src, count=1, flags=re.S)
-if body == src:
+m = re.match(r'\s*<title>.*?</title>\s*\n\s*(<link[^>]*fonts\.googleapis[^>]*>)\s*\n',
+             src, flags=re.S)
+if not m:
     sys.exit("не нашёл <title>/<link> в ulyana.html — проверь начало файла")
+FONTS = m.group(1)          # берём подключение шрифтов из исходника, не дублируем
+body = src[m.end():]
 
 img = f"{BASE}/og.png" if BASE else "og.png"
 url = f"{BASE}/" if BASE else ""
@@ -48,10 +50,18 @@ head = f'''<!doctype html>
 <link rel="icon" href='data:image/svg+xml,{HEART}'>
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500&family=Pixelify+Sans:wght@400;500&display=swap">
+{FONTS}
 </head>
 <body>
 '''
 
-io.open("docs/index.html", "w", encoding="utf-8").write(head + body.strip() + "\n</body>\n</html>\n")
+out = head + body.strip() + "\n</body>\n</html>\n"
+
+# страховка: подключение шрифтов должно попасть в сборку ровно одно и то же
+src_fonts = set(re.findall(r'family=([^&"\']+)', FONTS))
+out_fonts = set(re.findall(r'family=([^&"\']+)', out))
+if src_fonts != out_fonts:
+    sys.exit(f"шрифты разошлись: в исходнике {src_fonts}, в сборке {out_fonts}")
+
+io.open("docs/index.html", "w", encoding="utf-8").write(out)
 print(f"docs/index.html собран" + (f" для {BASE}" if BASE else " с относительными ссылками"))
