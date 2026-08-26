@@ -4,7 +4,7 @@
 печатается по буквам, по небу плывут пиксельные сердечки, искры и смайлики.
 Тап в любом месте — следующий комплимент и салют из сердечек.
 
-**Открыть:** https://mynzhanov.github.io/ulyana/
+**Открыть:** https://mynzhanov.github.io/Ulyana/
 
 ## Что где
 
@@ -22,7 +22,7 @@
 по одному на строку. После правки:
 
 ```
-python3 build-site.py https://mynzhanov.github.io/ulyana
+python3 build-site.py https://mynzhanov.github.io/Ulyana
 git commit -am "новые комплименты" && git push
 ```
 
