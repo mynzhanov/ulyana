@@ -46,8 +46,8 @@
   }
   @keyframes rise {
     0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-    18%  { opacity: 0.85; }
-    80%  { opacity: 0.85; }
+    18%  { opacity: 0.7; }
+    80%  { opacity: 0.7; }
     100% { transform: translate3d(var(--dx), -108vh, 0); opacity: 0; }
   }
 
@@ -405,8 +405,9 @@
     if (!seed && (document.hidden || sky.childElementCount >= CAP())) return;
     const el = document.createElement("div");
     el.className = "float";
-    el.style.left = rnd(3, 90).toFixed(1) + "vw";
-    el.style.setProperty("--dx", rnd(-45, 45).toFixed(0) + "px");
+    /* держим центральную колонку свободной: там читается комплимент */
+    el.style.left = (Math.random() < 0.5 ? rnd(2, 25) : rnd(74, 95)).toFixed(1) + "vw";
+    el.style.setProperty("--dx", rnd(-26, 26).toFixed(0) + "px");
     const dur = rnd(11, 19);
     el.style.animationDuration = dur.toFixed(1) + "s";
     if (seed) el.style.animationDelay = "-" + rnd(0, dur * 0.8).toFixed(1) + "s";
