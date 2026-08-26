@@ -1,5 +1,5 @@
 <title>Сто комплиментов Ульяне</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500&family=Pixelify+Sans:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;500&family=Press+Start+2P&display=swap">
 
 <style>
   :root {
@@ -7,7 +7,7 @@
     --cream: #f4ece6;
     --dim:   #8f767c;
     --rose:  #ee7499;
-    --font-pixel: "Pixelify Sans", "Courier New", monospace;
+    --font-pixel: "Press Start 2P", "Courier New", monospace;
     --font-led:   "Handjet", "Courier New", monospace;
   }
 
@@ -46,8 +46,8 @@
   }
   @keyframes rise {
     0%   { transform: translate3d(0, 0, 0); opacity: 0; }
-    18%  { opacity: 0.7; }
-    80%  { opacity: 0.7; }
+    18%  { opacity: 0.5; }
+    80%  { opacity: 0.5; }
     100% { transform: translate3d(var(--dx), -108vh, 0); opacity: 0; }
   }
 
@@ -94,10 +94,10 @@
     padding-right: 13px;
     white-space: nowrap;
     font-family: var(--font-led);
-    font-size: clamp(19px, 5vw, 26px);
+    font-size: clamp(14px, 3.4vw, 18px);
     font-weight: 500;
     line-height: 1;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--rose);
   }
@@ -114,16 +114,22 @@
     align-content: center;
     justify-self: center;
     width: 100%;
-    max-width: 20em;
+    max-width: 22ch;
   }
 
   .quote {
     margin: 0;
-    font-size: clamp(26px, 7.4vw, 36px);
-    line-height: 1.5;
+    font-size: clamp(16px, 4.8vw, 26px);
+    line-height: 1.75;
     text-wrap: balance;
     text-align: center;
     color: var(--cream);
+    /* пиксель-артная обводка: отделяет буквы от спрайтов, летящих позади */
+    text-shadow:
+       2px 0 0 var(--ink), -2px 0 0 var(--ink),
+       0 2px 0 var(--ink),  0 -2px 0 var(--ink),
+       2px 2px 0 var(--ink), -2px 2px 0 var(--ink),
+       2px -2px 0 var(--ink), -2px -2px 0 var(--ink);
     transition: opacity 240ms ease;
   }
   .quote.is-out { opacity: 0; }
@@ -148,16 +154,16 @@
     padding: 0 20px clamp(20px, 5vh, 34px);
     margin: 0;
     font-family: var(--font-led);
-    font-size: clamp(15px, 3.8vw, 18px);
-    letter-spacing: 0.36em;
-    text-indent: 0.36em;
+    font-size: clamp(12px, 3.2vw, 15px);
+    letter-spacing: 0.42em;
+    text-indent: 0.42em;
     text-transform: uppercase;
     color: var(--dim);
     user-select: none;
   }
 
   @media (max-height: 540px) {
-    .quote { font-size: clamp(20px, 4.6vh, 26px); line-height: 1.4; }
+    .quote { font-size: clamp(13px, 3.2vh, 18px); line-height: 1.6; }
     .stage { padding: 20px clamp(22px, 7vw, 56px); }
   }
 
