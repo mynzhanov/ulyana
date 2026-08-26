@@ -12,7 +12,7 @@ BASE = sys.argv[1].rstrip("/") if len(sys.argv) > 1 else ""
 TITLE = "Сто комплиментов Ульяне"
 DESC  = "101 комплимент Ульяне — бегущей строкой, пиксельными буквами."
 HEART = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 6" shape-rendering="crispEdges">'
-         '<path fill="%23ff6392" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>')
+         '<path fill="%23ee7499" d="M1 0h2v1H1zM4 0h2v1H4zM0 1h7v2H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z"/></svg>')
 
 src = io.open("ulyana.html", encoding="utf-8").read()
 body = re.sub(r'^\s*<title>.*?</title>\s*\n\s*<link[^>]*fonts\.googleapis[^>]*>\s*\n',
