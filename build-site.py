@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Собирает site/index.html из ulyana.html (артефакт хранит только тело страницы).
+"""Собирает docs/index.html из ulyana.html (артефакт хранит только тело страницы).
 
 Один аргумент — базовый адрес сайта, нужен для абсолютных og:image / og:url.
     python3 build-site.py https://ulyana.example.com
@@ -10,19 +10,48 @@ import io, re, sys
 
 BASE = sys.argv[1].rstrip("/") if len(sys.argv) > 1 else ""
 TITLE = "Сто комплиментов Ульяне"
-DESC  = "101 комплимент Ульяне — бегущей строкой, пиксельными буквами."
+DESC  = "101 комплимент для Ульяны, Ули, Ульяши, любимой и солнышка."
 ICON  = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'
          '<rect width="32" height="32" rx="7" fill="%23050505"/>'
          '<circle cx="16" cy="16" r="9" fill="%23ff7a9c" opacity="0.28"/>'
          '<circle cx="16" cy="16" r="5" fill="%23ff7a9c"/></svg>')
 
 src = io.open("ulyana.html", encoding="utf-8").read()
-m = re.match(r'\s*<title>.*?</title>\s*\n\s*(<link[^>]*fonts\.googleapis[^>]*>)\s*\n',
+m = re.match(r'\s*<title>.*?</title>\s*\n((?:\s*<link[^>]*fonts\.googleapis[^>]*>\s*\n)+)',
              src, flags=re.S)
 if not m:
     sys.exit("не нашёл <title>/<link> в ulyana.html — проверь начало файла")
-FONTS = m.group(1)          # берём подключение шрифтов из исходника, не дублируем
+FONTS = m.group(1).strip()  # все подряд идущие подключения шрифтов из исходника, не дублируем
 body = src[m.end():]
+
+# страховка: слоты обращения должны быть корректными, иначе на сайте вылезет «{имя: …}»
+forms_m  = re.search(r'const FORMS = \[(.*?)\];', body)
+dative_m = re.search(r'const DATIVE = \{(.*?)\};', body)
+lines_m  = re.search(r'const LINES = `\n(.*?)\n`\.trim', body, re.S)
+if not (forms_m and dative_m and lines_m):
+    sys.exit("не нашёл FORMS, DATIVE или LINES в ulyana.html")
+FORMS = re.findall(r'"([^"]+)"', forms_m.group(1))
+errors = []
+if set(re.findall(r'"([^"]+)":', dative_m.group(1))) != set(FORMS):
+    errors.append("DATIVE и FORMS перечисляют разные формы")
+for n, line in enumerate(lines_m.group(1).split("\n"), 1):
+    slots = re.findall(r'\{([^}]*)\}', line)
+    for sl in slots:
+        if not re.fullmatch(r'имя(:.*)?', sl):
+            errors.append(f"строка {n}: непонятный слот {{{sl}}}")
+    named = [sl for sl in slots if sl.startswith("имя")]
+    if len(named) > 1:
+        errors.append(f"строка {n}: больше одного слота")
+    for sl in named:
+        if ":" in sl:
+            only = [f.strip() for f in sl.split(":", 1)[1].split(",") if f.strip()]
+            unknown = [f for f in only if f not in FORMS]
+            if unknown:
+                errors.append(f"строка {n}: неизвестные формы {unknown}")
+            if len(only) < 2:
+                errors.append(f"строка {n}: в ограничении меньше двух форм")
+if errors:
+    sys.exit("ошибки в слотах обращения:\n  " + "\n  ".join(errors))
 
 img = f"{BASE}/og.png" if BASE else "og.png"
 url = f"{BASE}/" if BASE else ""
@@ -34,7 +63,7 @@ head = f'''<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{TITLE}</title>
 <meta name="description" content="{DESC}">
-<meta name="theme-color" content="#100d16">
+<meta name="theme-color" content="#050505">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="{TITLE}">

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Сто комплиментов Ульяне</title>
-<meta name="description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
-<meta name="theme-color" content="#100d16">
+<meta name="description" content="101 комплимент для Ульяны, Ули, Ульяши, любимой и солнышка.">
+<meta name="theme-color" content="#050505">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Сто комплиментов Ульяне">
-<meta property="og:description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
+<meta property="og:description" content="101 комплимент для Ульяны, Ули, Ульяши, любимой и солнышка.">
 <meta property="og:image" content="https://mynzhanov.github.io/ulyana/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -17,13 +17,14 @@
 <meta property="og:url" content="https://mynzhanov.github.io/ulyana/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Сто комплиментов Ульяне">
-<meta name="twitter:description" content="101 комплимент Ульяне — бегущей строкой, пиксельными буквами.">
+<meta name="twitter:description" content="101 комплимент для Ульяны, Ули, Ульяши, любимой и солнышка.">
 <meta name="twitter:image" content="https://mynzhanov.github.io/ulyana/og.png">
 
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="%23050505"/><circle cx="16" cy="16" r="9" fill="%23ff7a9c" opacity="0.28"/><circle cx="16" cy="16" r="5" fill="%23ff7a9c"/></svg>'>
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500&family=Manrope:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marck+Script&text=%D1%8D%D1%82%D0%BE%20%D1%82%D0%B5%D0%B1%D0%B5.%D0%BB%D1%8E%D0%B1%D0%BB%D1%8E&display=block">
 </head>
 <body>
 <style>
@@ -297,6 +298,186 @@
     transition: opacity 900ms var(--ease), transform 900ms var(--ease), filter 900ms var(--ease);
   }
 
+  /* ---------- букет при входе ---------- */
+  .gift {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: clamp(4px, 1.4vh, 14px);
+    padding: 20px 16px 7vh;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  .gift__halo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(46vmax 40vmax at 50% 40%,
+                rgb(255 184 204 / 0.20), rgb(255 184 204 / 0.05) 46%, transparent 72%);
+    opacity: 0;
+  }
+  .bouquet {
+    position: relative;
+    display: block;
+    width: min(80vw, 380px, 46vh);
+    height: auto;
+    overflow: visible;
+    opacity: 0;
+    transform: translateY(calc(50vh + 75%)) rotate(-8deg);
+    transform-origin: 50% 90%;
+  }
+  .bouquet .fl, .bouquet .ring, .bouquet .lf, .bouquet .glint, .bouquet .paper { transform-box: view-box; }
+  .bouquet .paper  { opacity: 0; transform: scale(0.78); }
+  .bouquet .fl     { opacity: 0; transform: scale(0.5) rotate(-24deg); }
+  .bouquet .ring   { transform: rotate(calc(var(--k) * -14deg - 10deg)) scale(0.84); }
+  .bouquet .lf     { opacity: 0; transform: scale(0.3); }
+  .bouquet .gyp    { opacity: 0; }
+  .bouquet .glint  { opacity: 0; }
+
+  .gift__note {
+    position: relative;
+    margin: 0;
+    display: grid;
+    justify-items: center;
+    font-family: "Marck Script", "Segoe Script", cursive;
+    font-size: clamp(34px, 10.6vw, 52px);
+    line-height: 1.1;
+    color: #fdeef2;
+    rotate: -2deg;
+    filter: drop-shadow(0 0 10px rgb(255 172 198 / 0.45));
+  }
+  .gift.font-ok .gift__note { word-spacing: -0.18em; }   /* подобрано под Marck Script — в запасном шрифте слова бы слиплись */
+  .gift__line { display: flex; align-items: center; }
+  .gift__line--love { color: #f9cfdb; margin-left: 0.8em; }
+  .gift__ink {
+    display: block;
+    padding: 0 0.12em 0.1em;
+    -webkit-mask-image: linear-gradient(90deg, #000 0 40%, transparent 60%);
+            mask-image: linear-gradient(90deg, #000 0 40%, transparent 60%);
+    -webkit-mask-size: 260% 100%;
+            mask-size: 260% 100%;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: 100% 0;
+            mask-position: 100% 0;
+  }
+  .gift__heart {
+    width: 0.44em;
+    height: 0.44em;
+    margin-left: -0.02em;
+    flex: none;
+    transform: scale(0);
+    filter: drop-shadow(0 0 8px rgb(255 150 182 / 0.6));
+  }
+
+  .gift__hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(22px + env(safe-area-inset-bottom));
+    text-align: center;
+    font-family: var(--font-meta);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-indent: 0.24em;
+    text-transform: uppercase;
+    color: rgb(244 239 241 / 0.42);
+    opacity: 0;
+  }
+  .gift.play .gift__hint { animation: gift-fade 1.2s var(--ease) 6.2s both; }
+
+  .petals { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .petals i {
+    position: absolute;
+    top: -6%;
+    left: var(--x);
+    width: calc(20px * var(--s));
+    opacity: 0;
+    will-change: transform;
+  }
+  .petals svg { display: block; width: 100%; height: auto; animation: gift-tumble var(--tum) cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+
+  /* сценарий: всё запускает класс .play */
+  .gift.play .gift__halo { animation: gift-fade 1.8s var(--ease) both; }
+  .gift.play .bouquet {
+    animation: gift-rise 2s cubic-bezier(0.22, 0.8, 0.32, 1) 0.15s both,
+               gift-sway 7s cubic-bezier(0.45, 0, 0.55, 1) 2.3s infinite;
+  }
+  .gift.play .bouquet .paper  { animation: gift-paper 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both; }
+  .gift.play .bouquet .lf     { animation: gift-grow 1.4s cubic-bezier(0.22, 1, 0.36, 1) var(--d) both; }
+  .gift.play .bouquet .fl     { animation: gift-bloom 1.6s cubic-bezier(0.22, 1, 0.36, 1) var(--d) both; }
+  .gift.play .bouquet .ring   { animation: gift-unfurl 2s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d) + var(--k) * 70ms) both; }
+  .gift.play .bouquet .gyp    { animation: gift-fade 1.4s var(--ease) 1.6s both; }
+  .gift.play .bouquet .glint  { animation: gift-twinkle 3s cubic-bezier(0.45, 0, 0.55, 1) var(--del) infinite; }
+  .gift.play .gift__line--you  .gift__ink { animation: gift-write 1.2s cubic-bezier(0.45, 0.05, 0.3, 1) 2.6s both; }
+  .gift.play .gift__line--love .gift__ink { animation: gift-write 1s cubic-bezier(0.45, 0.05, 0.3, 1) 3.75s both; }
+  .gift.play .gift__heart {
+    animation: gift-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 4.6s both,
+               gift-beat 2.4s cubic-bezier(0.45, 0, 0.55, 1) 5.4s infinite;
+  }
+  /* лепесткам нужна постоянная скорость падения, поэтому linear */
+  .gift.play .petals i { animation: gift-fall var(--dur) linear var(--del) infinite; }
+
+  /* первый тап — сразу вся картинка, без ожидания */
+  .gift.done .gift__halo, .gift.done .bouquet, .gift.done .bouquet .fl, .gift.done .bouquet .ring,
+  .gift.done .bouquet .paper, .gift.done .gift__hint,
+  .gift.done .bouquet .lf, .gift.done .bouquet .gyp, .gift.done .gift__ink, .gift.done .gift__heart {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+    -webkit-mask-position: 0 0;
+            mask-position: 0 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gift.done .bouquet     { animation: gift-sway 7s cubic-bezier(0.45, 0, 0.55, 1) infinite !important; }
+    .gift.done .gift__heart { animation: gift-beat 2.4s cubic-bezier(0.45, 0, 0.55, 1) 0.3s infinite !important; }
+  }
+
+  .gift.leave { animation: gift-out 1.3s cubic-bezier(0.45, 0, 0.2, 1) both; pointer-events: none; }
+  .gift.leave .bouquet    { filter: blur(6px); transition: filter 1.3s cubic-bezier(0.45, 0, 0.2, 1); }
+  .gift.leave .gift__note { filter: drop-shadow(0 0 10px rgb(255 172 198 / 0.45)) blur(6px);
+                            transition: filter 1.3s cubic-bezier(0.45, 0, 0.2, 1); }
+
+  @keyframes gift-fade    { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes gift-rise    { from { opacity: 0; transform: translateY(calc(50vh + 75%)) rotate(-8deg); }
+                            6%   { opacity: 1; }
+                            64%  { transform: translateY(-2.4%) rotate(1.6deg); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+                            84%  { transform: translateY(0.6%) rotate(-0.5deg); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+                            to   { opacity: 1; transform: none; } }
+  @keyframes gift-sway    { 0%, 100% { rotate: 0deg; } 25% { rotate: -1.1deg; } 75% { rotate: 1.1deg; } }
+  @keyframes gift-grow    { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+  @keyframes gift-bloom   { from { opacity: 0; transform: scale(0.5) rotate(-24deg); }
+                            22%  { opacity: 1; }
+                            to   { opacity: 1; transform: none; } }
+  @keyframes gift-paper   { from { opacity: 0; transform: scale(0.78); } 25% { opacity: 1; } to { opacity: 1; transform: none; } }
+  @keyframes gift-unfurl  { to { transform: none; } }
+  @keyframes gift-write   { from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+                            to   { -webkit-mask-position: 0 0;    mask-position: 0 0; } }
+  @keyframes gift-pop     { from { transform: scale(0) rotate(-20deg); } to { transform: none; } }
+  @keyframes gift-beat    { 0%, 48%, 100% { scale: 1; } 12% { scale: 1.16; } 24% { scale: 1; } 36% { scale: 1.08; } }
+  @keyframes gift-twinkle { 0%, 100% { opacity: 0; transform: scale(0.4); } 50% { opacity: 0.9; transform: scale(1) rotate(45deg); } }
+  @keyframes gift-fall    { 0%   { opacity: 0; transform: translate3d(0, 0, 0) rotate(0deg); }
+                            10%  { opacity: 0.9; }
+                            50%  { transform: translate3d(var(--dx), 56vh, 0) rotate(calc(var(--r) * 0.5)); }
+                            88%  { opacity: 0.8; }
+                            100% { opacity: 0; transform: translate3d(calc(var(--dx) * -0.5), 112vh, 0) rotate(var(--r)); } }
+  @keyframes gift-tumble  { 0%, 100% { transform: rotate3d(1, 0.35, 0, 0deg); } 50% { transform: rotate3d(1, 0.35, 0, 72deg); } }
+  @keyframes gift-out     { to { opacity: 0; transform: translateY(-4vh) scale(0.96); } }
+
+  /* телефон боком: записка рядом с букетом */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .gift { grid-auto-flow: column; align-items: center; gap: 5vw; padding-bottom: 20px; }
+    .bouquet { width: min(40vw, 66vh); }
+    .gift__note { justify-items: start; font-size: clamp(28px, 9vh, 44px); }
+  }
+
   @media (max-height: 620px) {
     .quote { font-size: clamp(16px, 3.6vh, 22px); line-height: 1.35; }
     .card__core { padding: 20px 18px; }
@@ -306,11 +487,28 @@
     .glow i { animation: none; }
     .ribbon__track { animation: none; }
     .ribbon { overflow-x: auto; }
-    .rise, .quote { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+    .rise, .quote { transition: none !important; transform: none !important; filter: none !important; }
+    .quote { opacity: 1 !important; }
+    .gift__halo, .bouquet, .bouquet .fl, .bouquet .ring, .bouquet .lf, .bouquet .gyp, .bouquet .paper, .gift__ink, .gift__heart, .gift__hint {
+      animation: none !important; opacity: 1 !important; transform: none !important;
+      -webkit-mask-position: 0 0 !important; mask-position: 0 0 !important;
+    }
+    .petals, .bouquet .glint { display: none; }
+    .gift.leave { animation: gift-fade 0.6s var(--ease) reverse both; }
   }
 </style>
 
 <div class="glow" aria-hidden="true"><i></i><i></i></div>
+
+<div class="gift" id="gift">
+  <div class="gift__halo" aria-hidden="true"></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+  <p class="gift__note" id="giftNote">
+    <span class="gift__line gift__line--you"><span class="gift__ink">это тебе.</span></span>
+    <span class="gift__line gift__line--love"><span class="gift__ink">люблю.</span><svg class="gift__heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2C5.6 15.6 2.2 12.2 2.2 8.4c0-2.9 2.3-5.1 5.1-5.1 1.9 0 3.6 1 4.7 2.6 1.1-1.6 2.8-2.6 4.7-2.6 2.8 0 5.1 2.2 5.1 5.1 0 3.8-3.4 7.2-9.8 12.8z" fill="#f4afc3"/></svg></span>
+  </p>
+  <p class="gift__hint">коснись — там ещё кое-что</p>
+</div>
 
 <div class="shell">
   <div class="island rise" id="island"><b></b><span>Ульяне</span></div>
@@ -337,111 +535,337 @@
   "use strict";
 
   const LINES = `
-Ульяна, ты как солнце — только не слепишь, а согреваешь
+{имя: Ульяна, Ульяша, Уля, любимая}, ты как солнце — только не слепишь, а согреваешь
 У тебя смех, от которого день сам собой выпрямляется
 Ты умеешь молчать так, что рядом становится спокойно
-С тобой даже очередь в магазине — маленькое приключение
+С тобой, {имя}, даже очередь в магазине — маленькое приключение
 Твои глаза — это два аргумента против плохого настроения
 Имя Ульяна звучит как первые ноты хорошей песни
 Ты добрая не потому, что надо, а потому что иначе не умеешь
 Рядом с тобой хочется быть лучше, чем ты есть
-У тебя талант превращать обычный вечер в лучший
+У тебя талант превращать обычный вечер в лучший, {имя}
 Ты красивая даже в семь утра с непричёсанными мыслями
 С тобой можно молчать полчаса и не заскучать
-Ты умнее, чем позволяешь себе казаться
+Ты умнее, чем позволяешь себе казаться, {имя: Ульяна, Ульяша, Уля, любимая}
 У тебя руки, за которые хочется держаться
 Ты слушаешь так, будто важнее меня в мире нет
-Ульяна, твоя улыбка портит статистику плохих дней
+{имя}, твоя улыбка портит статистику плохих дней
 Ты пахнешь домом, в который хочется возвращаться
 У тебя походка человека, который знает, куда идёт
-Ты умеешь радоваться мелочам — это редкий дар
+Ты умеешь радоваться мелочам — это редкий дар, {имя}
 С тобой не страшно быть настоящим
-Ты смеёшься над моими шутками — уже за это спасибо
+Ты смеёшься над моими шутками — уже за это спасибо, {имя}
 Ты красивая тихой красотой, которая не кричит
 Твой голос — лучший будильник и лучшая колыбельная
-Ульяна, ты умеешь превращать «надо» в «хочу»
+{имя}, ты умеешь превращать «надо» в «хочу»
 Ты как хорошая книга: каждый раз находишь новое
 У тебя честные глаза, и это самое красивое в тебе
-Ты не боишься быть смешной — а это смелость
-С тобой чай вкуснее, а дождь уютнее
+{имя}, ты не боишься быть смешной — а это смелость
+С тобой чай вкуснее, а дождь уютнее, {имя}
 Ты помнишь мелочи, которые никто не помнит
 Твоя забота не громкая, но её очень видно
-Ульяна, ты обнимаешь так, что всё встаёт на место
-Ты искренняя, а это редкий дефицит
+{имя}, ты обнимаешь так, что всё встаёт на место
+Ты искренняя, {имя}, а это редкий дефицит
 У тебя вкус, который нельзя купить
 Ты справляешься с тем, о чём другие только жалуются
-Твои волосы стоит трогать чаще, чем разрешено
-Ты умеешь спорить и при этом не обижать
+Твои волосы стоит трогать чаще, чем разрешено, {имя}
+{имя}, ты умеешь спорить и при этом не обижать
 С тобой любая дорога кажется короче
 Ты красивая, когда сосредоточена — особенно тогда
-Ульяна, ты человек, которому хочется писать первым
+{имя}, ты человек, которому хочется писать первым
 Ты умеешь прощать без напоминаний
-Твоё «доброе утро» работает лучше кофе
+Твоё «доброе утро» работает лучше кофе, {имя}
 Ты не пытаешься нравиться — и поэтому нравишься
-У тебя сильный характер в очень мягкой обёртке
+{имя}, у тебя сильный характер в очень мягкой обёртке
 Ты замечаешь, что мне плохо, раньше меня самого
 С тобой не скучно даже в полной тишине
-Ты умеешь мечтать вслух — не бросай, пожалуйста
-Ульяна, у тебя почерк такой же красивый, как ты
-Ты честная даже когда это неудобно
-У тебя редкая способность делать людям легче
+{имя}, ты умеешь мечтать вслух — не бросай, пожалуйста
+{имя}, у тебя почерк такой же красивый, как ты
+Ты честная, даже когда это неудобно
+У тебя редкая способность делать людям легче, {имя}
 Ты выглядишь так, что хочется взять за руку при всех
 Ты умеешь смеяться до слёз — и это лечит
-С тобой хочется строить планы дальше выходных
-Ты бываешь упрямой, и мне это нравится
-Ульяна, ты слушаешь музыку так, будто её видишь
-Ты никогда не бываешь лишней
+С тобой хочется строить планы дальше выходных, {имя}
+Ты бываешь упрямой, {имя}, и мне это нравится
+{имя}, ты слушаешь музыку так, будто её видишь
+Ты никогда не бываешь лишней, {имя}
 У тебя тёплые ладони и такое же сердце
 Ты держишь слово — это дороже любых комплиментов
 Твоя усталость тебе, между прочим, тоже идёт
 Ты умеешь начинать заново — это настоящая сила
 С тобой можно быть глупым и не стыдиться
-Ульяна, ты делаешь комнату светлее, просто войдя
+{имя: Ульяна, Ульяша, Уля, любимая}, ты делаешь комнату светлее, просто войдя
 Ты задаёшь вопросы, после которых думаешь днями
 У тебя красивая спина, когда уходишь, и лучше — когда возвращаешься
 Ты не завидуешь, и это очень взрослое качество
 Твоя доброта — не наивность, а осознанный выбор
 Ты пишешь смешно, даже когда совсем не стараешься
-С тобой не нужно притворяться сильным
-Ульяна, ты умеешь быть рядом молча и вовремя
+С тобой не нужно притворяться сильным, {имя}
+Ты умеешь быть рядом молча и вовремя, {имя}
 Ты красивая без фильтров — многократно проверено
 У тебя привычка гладить всех котов, и она говорит о тебе всё
 Ты умеешь ждать и не пилить за это
-Твои идеи смелее, чем ты сама о себе думаешь
-Ты извиняешься первой, даже когда права
+{имя}, твои идеи смелее, чем ты сама о себе думаешь
+Ты извиняешься первой, {имя}, даже когда права
 С тобой еда вкуснее, а планы реальнее
-Ульяна, у тебя смех, который слышно через две комнаты
+{имя}, у тебя смех, который слышно через две комнаты
 Ты удивляешь, совсем не пытаясь удивить
 Ты помнишь все дни рождения — почти суперсила
 Твоя внимательность к деталям пугает и восхищает
-Ты одинаково хороша в платье и в моей футболке
+Ты одинаково хороша в платье и в моей футболке, {имя}
 Ты умеешь быть слабой и не переставать быть сильной
 С тобой утро перестало быть врагом
-Ульяна, тебе очень идёт быть счастливой
+Тебе очень идёт быть счастливой, {имя}
 Ты хвалишь так, что сразу хочется работать
-У тебя выдающийся талант к неловким танцам на кухне
+У тебя выдающийся талант к неловким танцам на кухне, {имя}
 Ты не обесцениваешь — ни себя, ни других
-Твои сообщения я перечитываю по два раза
+Твои сообщения я перечитываю по два раза, {имя}
 Ты умеешь превращать плохие новости в план действий
-С тобой тишина никогда не бывает пустой
-Ульяна, у тебя очень красивые локти — да, и они тоже
+С тобой тишина никогда не бывает пустой, {имя}
+{имя}, у тебя очень красивые локти — да, и они тоже
 Ты доводишь начатое, даже когда никто не смотрит
-Твоё мнение важно мне больше, чем ты думаешь
+{имя}, твоё мнение важно мне больше, чем ты думаешь
 Ты умеешь смотреть так, что всё понятно без слов
 Ты не боишься спрашивать — поэтому знаешь больше всех
 С тобой хочется быть честным даже в мелочах
-Ульяна, ты пахнешь как хорошее воскресенье
+{имя}, ты пахнешь как хорошее воскресенье
 Ты умеешь дружить, а это отдельный талант
 Твоя смелость тише моей, но заметно крепче
-Ты красивая, когда злишься, но лучше не проверять
+{имя}, ты красивая, когда злишься, но лучше не проверять
 Ты делаешь мир вокруг себя чуть аккуратнее
-Ульяна, с тобой всё как-то само получается
+С тобой всё как-то само получается, {имя}
 У тебя глаза человека, который умеет верить
 Ты — лучшее, что случилось со мной случайно
 `.trim().split("\n").map(s => s.trim()).filter(Boolean);
 
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+
+  /* ---------- обращения ----------
+     {имя} в строке — слот: при каждом показе туда встаёт одна из форм.
+     {имя: Уля, любимая} — только перечисленные формы. */
+  const FORMS = ["Ульяна", "Ульяша", "Уля", "любимая", "солнышко"];
+  const DATIVE = { "Ульяна": "Ульяне", "Ульяша": "Ульяше", "Уля": "Уле", "любимая": "любимой", "солнышко": "солнышку" };
+  const SLOT = /\{имя(?::([^}]*))?\}/;
+
+  function formsOf(line) {
+    const m = line.match(SLOT);
+    if (!m) return [];
+    const only = m[1] ? m[1].split(",").map(s => s.trim()).filter(f => FORMS.includes(f)) : [];
+    return only.length ? only : FORMS;
+  }
+
+  /* avoid — форма, которую не стоит повторять подряд */
+  function address(line, form) {
+    const m = line.match(SLOT);
+    if (!m) return line;
+    const word = m.index === 0 ? form[0].toUpperCase() + form.slice(1) : form;
+    return line.slice(0, m.index) + word + line.slice(m.index + m[0].length);
+  }
+  function render(line, avoid) {
+    const forms = formsOf(line);
+    if (!forms.length) return { text: line, form: null };
+    const fresh = forms.filter(f => f !== avoid);
+    const form = pick(fresh.length ? fresh : forms);
+    return { text: address(line, form), form };
+  }
+
+  /* подпись в «острове» тоже меняет форму — одна на заход, чтобы шапка не мигала */
+  document.querySelector("#island span").textContent = DATIVE[pick(FORMS)];
+
+  /* ---------- букет: рисуется кодом, сид фиксированный — каждый раз один и тот же ---------- */
+  let seed = 20260928;
+  const rnd = () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  const r1 = v => Math.round(v * 10) / 10;
+  const toRGB = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const mix = (a, b, t) => "#" + toRGB(a).map((v, i) =>
+    Math.round(v + (toRGB(b)[i] - v) * t).toString(16).padStart(2, "0")).join("");
+  const petalPath = (L, W) =>
+    `M0 0C${r1(W)} ${r1(-.15 * L)} ${r1(1.1 * W)} ${r1(-.75 * L)} ${r1(.45 * W)} ${r1(-.98 * L)}` +
+    `Q0 ${r1(-1.07 * L)} ${r1(-.45 * W)} ${r1(-.98 * L)}` +
+    `C${r1(-1.1 * W)} ${r1(-.75 * L)} ${r1(-W)} ${r1(-.15 * L)} 0 0Z`;
+  const leafPath = (L, W) =>
+    `M0 0C${r1(W)} ${r1(-.28 * L)} ${r1(.8 * W)} ${r1(-.82 * L)} 0 ${r1(-L)}` +
+    `C${r1(-.8 * W)} ${r1(-.82 * L)} ${r1(-W)} ${r1(-.28 * L)} 0 0Z`;
+
+  /* очень нежно-розовые и белые, внутренние кольца чуть глубже по тону */
+  const PAL = {
+    white: { tip: "#ffffff", base: "#f6e8eb", deep: "#efd2da", edge: "rgba(224,182,195,.22)" },
+    blush: { tip: "#fff5f8", base: "#f6d2dc", deep: "#ecb5c5", edge: "rgba(224,150,174,.18)" },
+    pink:  { tip: "#fde8ee", base: "#efbdcc", deep: "#e3a0b5", edge: "rgba(212,126,154,.2)" },
+  };
+
+  function bouquetSVG() {
+    let defs = "";
+    for (const [name, P] of Object.entries(PAL)) {
+      defs += `<radialGradient id="c-${name}"><stop offset="0" stop-color="${P.deep}" stop-opacity=".9"/>` +
+        `<stop offset="1" stop-color="${P.deep}" stop-opacity="0"/></radialGradient>`;
+    }
+    defs +=
+      `<linearGradient id="leaf" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#6f8b72"/><stop offset="1" stop-color="#a9c0a6"/></linearGradient>` +
+      `<linearGradient id="wrap-pink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9dbe3"/><stop offset="1" stop-color="#e8bccb"/></linearGradient>` +
+      `<linearGradient id="wrap-pink-soft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fce9ee" stop-opacity=".96"/><stop offset="1" stop-color="#efcad5" stop-opacity=".94"/></linearGradient>` +
+      `<linearGradient id="wrap-inner" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe5eb"/><stop offset="1" stop-color="#efc9d4"/></linearGradient>` +
+      `<linearGradient id="wrap-white" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffafb" stop-opacity=".95"/><stop offset="1" stop-color="#eedbe0" stop-opacity=".92"/></linearGradient>` +
+      `<linearGradient id="satin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9d3dd"/><stop offset=".5" stop-color="#f2b6c7"/><stop offset="1" stop-color="#e79fb4"/></linearGradient>` +
+      `<radialGradient id="shade"><stop offset=".55" stop-color="#9c5f75" stop-opacity=".36"/><stop offset="1" stop-color="#9c5f75" stop-opacity="0"/></radialGradient>` +
+      `<radialGradient id="halo"><stop offset="0" stop-color="#ffc4d4" stop-opacity=".26"/><stop offset="1" stop-color="#ffc4d4" stop-opacity="0"/></radialGradient>`;
+
+    /* край папиросной бумаги — волнами */
+    const scallop = (cx, cy, rx, ry, a0, a1, seg, amp) => {
+      const pt = (deg, k) => {
+        const a = deg * Math.PI / 180;
+        return r1(cx + Math.cos(a) * rx * k) + " " + r1(cy - Math.sin(a) * ry * k);
+      };
+      let d = pt(a0, 1);
+      for (let i = 0; i < seg; i++) {
+        const s0 = a0 + (a1 - a0) * i / seg, s1 = a0 + (a1 - a0) * (i + 1) / seg;
+        d += ` Q${pt((s0 + s1) / 2, 1 + amp * (.3 + rnd() * 1.4))} ${pt(s1, 1)}`;
+      }
+      return d;
+    };
+
+    /* розовый лист позади, белый поверх — розовое выглядывает по краям */
+    const back = `<g class="paper" style="transform-origin:200px 380px">` +
+      `<path d="M186 396 L${scallop(200, 204, 160, 150, 200, -20, 9, .075)} L214 396Z" fill="url(#wrap-pink)"/>` +
+      `<path d="M188 394 L${scallop(200, 198, 142, 138, 194, -14, 10, .06)} L212 394Z" fill="url(#wrap-inner)"/></g>`;
+
+    const LEAVES = [   /* несимметрично и пучками, как в живом букете */
+      [112, 236, -80, 84, 17], [120, 222, -62, 58, 14], [292, 214, 70, 66, 16], [104, 150, -48, 72, 15],
+      [296, 160, 58, 52, 13], [286, 140, 40, 40, 11], [172, 92, -18, 62, 13], [236, 86, 30, 46, 12],
+      [140, 296, -118, 64, 15], [270, 300, 104, 48, 13],
+    ];
+    const leaves = LEAVES.map(([x, y, a, L, W], i) =>
+      `<g class="lf" style="--d:${(1.05 + i * .06).toFixed(2)}s;transform-origin:${x}px ${y}px">` +
+      `<g transform="translate(${x} ${y}) rotate(${a})"><path d="${leafPath(L, W)}" fill="url(#leaf)"/>` +
+      `<path d="M0 -2Q${r1(W * .12)} ${r1(-L * .5)} 0 ${r1(-L * .92)}" stroke="#d5e4d1" stroke-opacity=".35" stroke-width=".8" fill="none"/></g></g>`
+    ).join("");
+
+    /* гипсофила — белые крупинки по краю */
+    let gyp = "";
+    for (const [x, y] of [[70, 190], [330, 186], [104, 98], [298, 96], [200, 44], [92, 262], [310, 258],
+                          [166, 58], [236, 56], [60, 232], [344, 228]]) {
+      const count = 5 + Math.floor(rnd() * 5);
+      for (let i = 0; i < count; i++) {
+        const dx = (rnd() - .5) * 26, dy = (rnd() - .5) * 22;
+        gyp += `<line x1="${r1(x + dx * .3)}" y1="${r1(y + dy * .3 + 10)}" x2="${r1(x + dx)}" y2="${r1(y + dy)}" stroke="#b9c9b5" stroke-opacity=".45" stroke-width=".6"/>` +
+          `<circle cx="${r1(x + dx)}" cy="${r1(y + dy)}" r="${r1(1.5 + rnd() * 1.7)}" fill="${rnd() < .8 ? "#ffffff" : "#fbe1e9"}" fill-opacity=".92"/>`;
+      }
+    }
+
+    /* цветы: пионы и садовые розы, верхние рисуются первыми, нижние — ближе к нам */
+    const FL = [
+      { x: 200, y: 178, r: 60, t: "peony", p: "blush", d: 0.35 },
+      { x: 128, y: 212, r: 50, t: "rose",  p: "white", d: 0.48 },
+      { x: 274, y: 206, r: 50, t: "peony", p: "pink",  d: 0.56 },
+      { x: 150, y: 128, r: 40, t: "peony", p: "white", d: 0.26 },
+      { x: 252, y: 124, r: 42, t: "rose",  p: "blush", d: 0.32 },
+      { x: 200, y: 92,  r: 30, t: "rose",  p: "pink",  d: 0.20 },
+      { x: 160, y: 276, r: 42, t: "peony", p: "pink",  d: 0.68 },
+      { x: 244, y: 278, r: 44, t: "rose",  p: "white", d: 0.76 },
+      { x: 92,  y: 152, r: 28, t: "rose",  p: "blush", d: 0.42 },
+      { x: 312, y: 150, r: 30, t: "peony", p: "blush", d: 0.50 },
+      { x: 76,  y: 238, r: 26, t: "rose",  p: "pink",  d: 0.64 },
+      { x: 326, y: 234, r: 24, t: "rose",  p: "blush", d: 0.70 },
+      { x: 200, y: 250, r: 24, t: "rose",  p: "white", d: 0.80 },
+    ].sort((a, b) => a.y - b.y);
+
+    /* лепестки сплошным тоном: в Safari SVG перерисовывается целиком каждый кадр,
+       и градиент на ~300 лепестках ронял раскрытие до 26 fps */
+    const ringTone = (P, k) => mix(mix(P.tip, P.base, k * .16), mix(P.base, P.deep, k * .2), .18);
+    const flower = f => {
+      const P = PAL[f.p], peony = f.t === "peony";
+      const rings = peony
+        ? [[1, 9, .6], [.82, 8, .58], [.64, 7, .56], [.46, 6, .54], [.28, 5, .5]]
+        : [[1, 6, .74], [.8, 5, .72], [.6, 5, .68], [.4, 4, .62]];
+      let g = `<g class="fl" style="--d:${f.d}s;transform-origin:${f.x}px ${f.y}px">` +
+        `<g transform="translate(${f.x} ${f.y}) scale(1 .9) translate(${-f.x} ${-f.y})">` +
+        `<ellipse cx="${f.x}" cy="${r1(f.y + f.r * .16)}" rx="${r1(f.r * 1.18)}" ry="${r1(f.r * 1.06)}" fill="url(#shade)"/>`;
+      rings.forEach(([lf, count, wf], k) => {
+        const L = f.r * lf, W = L * wf, off = rnd() * 360, lift = k * f.r * .03;
+        const tone = ringTone(P, k);
+        if (k) g += `<circle cx="${f.x}" cy="${r1(f.y - lift + L * .05)}" r="${r1(L * 1.04)}" fill="${P.deep}" fill-opacity=".16"/>`;
+        g += `<g class="ring" style="--k:${k};transform-origin:${f.x}px ${f.y}px">`;
+        for (let j = 0; j < count; j++) {
+          const a = off + j * 360 / count + (rnd() - .5) * 16, s = .88 + rnd() * .22;
+          g += `<path d="${petalPath(L * s, W * (.9 + rnd() * .2))}" transform="translate(${f.x} ${r1(f.y - lift)}) rotate(${r1(a)})" ` +
+            `fill="${mix(tone, rnd() < .65 ? P.tip : P.base, rnd() * .25)}" stroke="${P.edge}" stroke-width=".6"/>`;
+        }
+        g += `</g>`;
+      });
+      g += `<circle cx="${f.x}" cy="${r1(f.y - f.r * .1)}" r="${r1(f.r * .3)}" fill="url(#c-${f.p})" opacity=".7"/>`;
+      if (peony) {
+        for (let j = 0; j < 5; j++) {
+          g += `<path d="${petalPath(f.r * .16, f.r * .1)}" transform="translate(${f.x} ${r1(f.y - f.r * .12)}) rotate(${r1(j * 72 + rnd() * 20)})" fill="${mix(P.base, P.deep, .7)}" opacity=".8"/>`;
+        }
+      } else {
+        let d = `M${f.x} ${r1(f.y - f.r * .12)}`, rr = f.r * .03;
+        for (let t = 0; t < 6; t++) {
+          rr += f.r * .028;
+          d += ` a${r1(rr)} ${r1(rr * .85)} 0 0 1 ${r1((t % 2 ? -1 : 1) * rr * 1.7)} 0`;
+        }
+        g += `<path d="${d}" fill="none" stroke="${P.deep}" stroke-width="1.1" stroke-linecap="round" opacity=".7"/>`;
+      }
+      return g + `</g></g>`;
+    };
+
+    /* кончики стеблей из-под упаковки, сама упаковка спереди и лента */
+    const stems = [[186, -9, 40], [193, -4, 46], [200, 1, 42], [207, 5, 48], [214, 10, 38]].map(([x, dx, len]) =>
+      `<path d="M${x} 430L${x + dx} ${430 + len}" stroke="#7f9b7c" stroke-width="2.6"/>`).join("");
+    const front =
+      `<path d="M190 402L210 402L205 462L195 462Z" fill="url(#wrap-white)"/>` +
+      `<path d="M146 336Q200 312 254 336L214 404L186 404Z" fill="url(#wrap-white)"/>` +
+      `<path d="M322 322Q268 296 210 330L194 406L210 408Z" fill="url(#wrap-pink-soft)"/>` +
+      `<path d="M78 322Q132 296 190 330L206 406L190 408Z" fill="url(#wrap-white)"/>` +
+      `<path d="M78 322Q132 296 190 330" stroke="#fff" stroke-opacity=".75" stroke-width="1" fill="none"/>` +
+      `<path d="M322 322Q268 296 210 330" stroke="#fff" stroke-opacity=".6" stroke-width="1" fill="none"/>` +
+      `<path d="M126 314Q160 356 198 400M274 314Q240 356 202 400" stroke="#d8b6c0" stroke-opacity=".55" stroke-width=".9" fill="none"/>` +
+      `<path d="M200 324L200 400" stroke="#d8b6c0" stroke-opacity=".3" stroke-width=".8"/>`;
+    const ribbon =
+      `<path d="M184 398Q200 404 216 398L217 408Q200 414 183 408Z" fill="url(#satin)"/>` +
+      `<path d="M199 402C176 380 146 384 152 402C157 418 184 414 199 404Z" fill="url(#satin)"/>` +
+      `<path d="M201 402C224 380 254 384 248 402C243 418 216 414 201 404Z" fill="url(#satin)"/>` +
+      `<path d="M190 401C180 394 166 395 168 402C170 408 182 407 190 403Z" fill="#e79ab0" fill-opacity=".45"/>` +
+      `<path d="M210 401C220 394 234 395 232 402C230 408 218 407 210 403Z" fill="#e79ab0" fill-opacity=".45"/>` +
+      `<path d="M195 408C188 428 176 444 166 458L177 462C186 446 195 428 201 410Z" fill="url(#satin)"/>` +
+      `<path d="M205 408C212 428 224 444 236 456L225 461C215 446 206 428 199 410Z" fill="url(#satin)"/>` +
+      `<ellipse cx="200" cy="404" rx="8.5" ry="7" fill="#f3b8c8"/>` +
+      `<path d="M158 396C166 388 180 388 192 398M242 396C234 388 220 388 208 398" stroke="#ffeef3" stroke-opacity=".7" stroke-width="1.2" fill="none" stroke-linecap="round"/>`;
+
+    const glints = [[118, 74, 0], [300, 70, 1.1], [336, 196, 2], [74, 128, 1.6], [214, 34, .6]]
+      .map(([x, y, d]) => `<g class="glint" style="--del:${(2.4 + d).toFixed(1)}s;transform-origin:${x}px ${y}px">` +
+        `<path d="M${x} ${y - 7}L${x + 1.3} ${y - 1.3}L${x + 7} ${y}L${x + 1.3} ${y + 1.3}L${x} ${y + 7}L${x - 1.3} ${y + 1.3}L${x - 7} ${y}L${x - 1.3} ${y - 1.3}Z" fill="#fff"/></g>`)
+      .join("");
+
+    return `<svg class="bouquet" viewBox="0 0 400 480" role="img" aria-label="Букет нежно-розовых и белых пионов и роз">` +
+      `<defs>${defs}</defs><circle cx="200" cy="210" r="210" fill="url(#halo)"/>` +
+      back + `<g class="leaves">${leaves}</g><g class="gyp">${gyp}</g>` +
+      FL.map(flower).join("") + stems + front + ribbon + glints + `</svg>`;
+  }
+
+  /* падающие лепестки */
+  function petalsHTML() {
+    const XS = [48, 14, 82, 30, 66, 6, 92, 38, 58];   /* вразброс, а не диагональю */
+    const tones = [["#f4c3d1", "#fff4f7"], ["#ecd9de", "#ffffff"], ["#f2b7c8", "#fde8ee"], ["#f7d3dd", "#fffafb"]];
+    let html = "";
+    for (let i = 0; i < 9; i++) {
+      const [base, tip] = tones[i % 4];
+      html += `<i style="--x:${r1(XS[i] + rnd() * 4)}%;--dx:${Math.round((rnd() - .5) * 90)}px;` +
+        `--dur:${r1(8.5 + rnd() * 4)}s;--del:${r1(2.2 + i * .55)}s;--s:${r1(.7 + rnd() * .55)};--r:${Math.round(180 + rnd() * 360)}deg;` +
+        `--tum:${r1(1.8 + rnd() * 1.6)}s">` +
+        `<svg viewBox="-8 -18 16 19"><defs><linearGradient id="fp${i}" x1="0" y1="1" x2="0" y2="0">` +
+        `<stop offset="0" stop-color="${base}"/><stop offset=".8" stop-color="${tip}"/></linearGradient></defs>` +
+        `<path d="${petalPath(17, 5.6)}" fill="url(#fp${i})"/></svg></i>`;
+    }
+    return html;
+  }
 
   /* ---------- кнопка ---------- */
   const btn = document.createElement("button");
@@ -455,20 +879,32 @@
 
   /* ---------- лента ---------- */
   const track = document.getElementById("track");
-  function buildRibbon() {
-    const items = shuffle(LINES).slice(0, 20)
-      .map(t => '<span class="ribbon__item">' + t + "</span>").join("");
+  let ribbonItems = [];
+  function buildRibbon(keepHead) {
+    const head = keepHead ? ribbonItems.slice(0, 5) : [];
+    const used = new Set(head.map(x => x.raw));
+    let last = null;
+    const rest = shuffle(LINES.filter(t => !used.has(t))).slice(0, 20 - head.length)
+      .map(t => { const r = render(t, last); last = r.form || last; return { raw: t, text: r.text }; });
+    ribbonItems = head.concat(rest);
+    const items = ribbonItems.map(x => '<span class="ribbon__item">' + esc(x.text) + "</span>").join("");
     track.innerHTML = '<div class="ribbon__group">' + items + '</div><div class="ribbon__group">' + items + "</div>";
+    /* перезапуск с нуля: если сменить длительность на ходу, лента прыгнет в случайную точку */
+    track.style.animation = "none";
+    void track.offsetWidth;
+    track.style.animation = "";
     track.style.animationDuration = (track.scrollWidth / 2 / 26).toFixed(0) + "s";
   }
   buildRibbon();
-  track.addEventListener("animationiteration", buildRibbon);
+  /* на стыке кругов на экране начало группы — оставляем его, чтобы текст не подменялся на глазах */
+  track.addEventListener("animationiteration", () => buildRibbon(true));
 
   /* ---------- комплименты ---------- */
   const quote = document.getElementById("quote");
   const box = document.getElementById("quoteBox");
 
-  /* высота под самую длинную фразу, чтобы карточка не дёргалась */
+  /* высота под самую длинную фразу, чтобы карточка не дёргалась.
+     Строку со слотом меряем с каждой её формой — «солнышко» шире «Ули». */
   function fitQuote() {
     const probe = document.createElement("blockquote");
     probe.className = "quote";
@@ -476,18 +912,23 @@
     box.appendChild(probe);
     let max = 0;
     for (const t of LINES) {
-      probe.textContent = t;
-      if (probe.offsetHeight > max) max = probe.offsetHeight;
+      const forms = formsOf(t);
+      for (const variant of forms.length ? forms.map(f => address(t, f)) : [t]) {
+        probe.textContent = variant;
+        if (probe.offsetHeight > max) max = probe.offsetHeight;
+      }
     }
     probe.remove();
     box.style.minHeight = max + "px";
   }
 
-  let order = shuffle(LINES.map((_, i) => i)), cursor = 0, hold = null, swap = null;
+  let order = shuffle(LINES.map((_, i) => i)), cursor = 0, hold = null, swap = null, lastForm = null;
 
   function show() {
     if (cursor >= order.length) { order = shuffle(LINES.map((_, i) => i)); cursor = 0; }
-    const text = LINES[order[cursor++]];
+    const r = render(LINES[order[cursor++]], lastForm);
+    const text = r.text;
+    if (r.form) lastForm = r.form;
     quote.classList.remove("is-in");
     quote.classList.add("is-out");
     /* без rAF: в скрытой вкладке он не вызывается и текст не появился бы вовсе */
@@ -503,13 +944,134 @@
   }
 
   btn.addEventListener("click", e => { e.stopPropagation(); show(); });
-  addEventListener("pointerdown", e => { if (!e.target.closest(".next")) show(); });
+  /* тап засчитывается на отпускании и только если жест не отменён:
+     щипок и прокрутка приходят с pointercancel, второй палец сбрасывает тап */
+  let tapId = null;
+  addEventListener("pointerdown", e => { tapId = e.isPrimary ? e.pointerId : null; });
+  addEventListener("pointercancel", () => { tapId = null; });
+  addEventListener("pointerup", e => {
+    if (e.pointerId !== tapId) return;
+    tapId = null;
+    if (giftState !== "closed") { tapGift(); return; }
+    const el = e.target instanceof Element ? e.target : null;
+    if (!el || !el.closest(".next, .ribbon")) show();   /* кнопка листает сама, лента — не для тапов */
+  });
   addEventListener("keydown", e => {
-    if (e.key === " " || e.key === "Enter") {
+    const act = e.key === " " || e.key === "Enter";
+    if (giftState !== "closed") {
+      if (e.key === "Escape") { e.preventDefault(); if (giftState === "open" && gift.classList.contains("play")) closeGift(); else tapGift(); }
+      else if (act) { e.preventDefault(); tapGift(); }
+      return;
+    }
+    if (act) {
       if (document.activeElement === btn) return;
       e.preventDefault(); show();
     }
   });
+
+  /* ---------- букет при входе ---------- */
+  const gift = document.getElementById("gift");
+  let giftState = gift ? "waiting" : "closed", giftT0 = 0, giftTimer = null, giftRun = 0, fastForwarded = false;
+  const GIFT_HOLD = reduced ? 6000 : 11000;   /* сколько букет стоит, если его не трогать */
+  const GIFT_AFTER = 3600;                     /* сколько стоит полная картинка после перемотки */
+  const SCENE = 5600;                          /* к этому моменту выскочило сердце */
+  const FAST = 3.5;                            /* во сколько раз перемотка ускоряет сцену */
+  const NOTE = "это тебе. люблю.";
+
+  if (gift) {
+    const holder = document.createElement("div");
+    holder.innerHTML = bouquetSVG();
+    gift.insertBefore(holder.firstChild, document.getElementById("giftNote"));
+    document.getElementById("petals").innerHTML = petalsHTML();
+  }
+
+  /* сцена ждёт рукописный шрифт, но не дольше 0.8 с — иначе записка
+     напишется запасным шрифтом или перескочит посреди письма */
+  function fontReady() {
+    const load = document.fonts && document.fonts.load
+      ? document.fonts.load('40px "Marck Script"', NOTE).catch(() => [])
+      : Promise.resolve([]);
+    load.then(faces => { if (faces.length) gift.classList.add("font-ok"); });
+    return Promise.race([load, new Promise(r => setTimeout(r, 800))]);
+  }
+  function openGift() {
+    if (giftState !== "waiting") return;
+    giftState = "open";
+    const run = ++giftRun;
+    fontReady().then(() => { if (run === giftRun && giftState === "open") startScene(); });
+  }
+  function startScene() {
+    if (gift.classList.contains("play")) return;
+    gift.classList.add("play");
+    giftT0 = performance.now();
+    clearTimeout(giftTimer);
+    giftTimer = setTimeout(closeGift, GIFT_HOLD);
+  }
+  function sceneComplete() {
+    const heart = gift.querySelector(".gift__heart");
+    const pop = heart.getAnimations ? heart.getAnimations().find(a => a.animationName === "gift-pop") : null;
+    return pop ? pop.playState === "finished" : performance.now() - giftT0 > SCENE;
+  }
+  /* перемотка — не склейка, а ускорение оставшейся сцены */
+  function fastForward() {
+    fastForwarded = true;
+    clearTimeout(giftTimer);
+    const anims = gift.getAnimations ? gift.getAnimations({ subtree: true }) : null;
+    if (anims) {
+      anims.forEach(a => {
+        if (a.effect && a.effect.getComputedTiming().iterations !== Infinity) a.playbackRate = FAST;
+      });
+      const left = Math.max(0, SCENE - (performance.now() - giftT0));
+      giftTimer = setTimeout(closeGift, left / FAST + GIFT_AFTER);
+    } else {
+      gift.classList.add("done");
+      giftTimer = setTimeout(closeGift, GIFT_AFTER);
+    }
+  }
+  function tapGift() {
+    if (giftState === "waiting") { openGift(); return; }   /* вебвью ошибся с видимостью — не держим её перед пустым экраном */
+    if (giftState === "paused") { resumeGift(); return; }
+    if (giftState !== "open") return;
+    if (!gift.classList.contains("play")) { startScene(); return; }   /* шрифт ещё грузится — начинаем сразу */
+    if (reduced || fastForwarded || sceneComplete()) closeGift();
+    else fastForward();
+  }
+  function closeGift() {
+    if (giftState !== "open" && giftState !== "paused") return;
+    giftState = "closed";
+    giftRun++;
+    clearTimeout(giftTimer);
+    gift.classList.add("leave");
+    setTimeout(() => gift.remove(), 1300);
+    revealPage();
+  }
+
+  /* ушла в мессенджер посреди сцены: вернётся — сцена начнётся заново.
+     Если всё уже увидела — просто не закрываем без неё. */
+  function resumeGift() {
+    if (document.hidden) return;
+    if (giftState === "waiting") openGift();
+    else if (giftState === "paused") {
+      giftState = "open";
+      clearTimeout(giftTimer);
+      giftTimer = setTimeout(closeGift, GIFT_AFTER);
+    }
+  }
+  if (gift) {
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) { resumeGift(); return; }
+      if (giftState !== "open") return;
+      clearTimeout(giftTimer);
+      if (gift.classList.contains("play") && sceneComplete()) { giftState = "paused"; return; }
+      giftRun++;
+      fastForwarded = false;
+      gift.classList.remove("play", "done");
+      void gift.offsetWidth;
+      giftState = "waiting";
+    });
+    addEventListener("pageshow", resumeGift);
+    addEventListener("focus", resumeGift);
+  }
 
   /* ---------- запуск ---------- */
   fitQuote();
@@ -517,13 +1079,21 @@
   let t;
   addEventListener("resize", () => { clearTimeout(t); t = setTimeout(() => { fitQuote(); buildRibbon(); }, 220); });
 
-  show();
-
-  /* каскадное появление */
+  /* каскадное появление страницы — уже после букета */
   const seq = [document.getElementById("island"), document.getElementById("deck"),
                btn, document.getElementById("ribbon")];
   btn.classList.add("rise");
-  seq.forEach((el, i) => setTimeout(() => el.classList.add("on"), reduced ? 0 : 90 + i * 130));
+  let revealed = false;
+  function revealPage() {
+    if (revealed) return;
+    revealed = true;
+    show();
+    seq.forEach((el, i) => setTimeout(() => el.classList.add("on"), reduced ? 0 : 260 + i * 130));
+  }
+
+  /* мессенджеры открывают ссылку в фоне — букет ждёт, пока страницу реально увидят */
+  if (giftState === "closed") revealPage();
+  else if (!document.hidden) openGift();
 })();
 </script>
 </body>
